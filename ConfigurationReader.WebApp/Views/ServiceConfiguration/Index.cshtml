@@ -1,0 +1,32 @@
+﻿@using ConfigurationReader.Shared.Models.Dtos
+@model IEnumerable<ServiceConfigurationDto>
+
+
+<table class="table table-bordered">
+    <a class="btn btn-primary" asp-controller="ServiceConfiguration" asp-action="Create">Yeni Kayıt</a>
+    <thead>
+        <tr>
+            <th>
+                Ad
+            </th>
+            <th>Tip</th>
+            <th>Değer</th>
+            <th>Uygulama Adı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Type</td>
+                <td>@item.Value</td>
+                <td>@item.ApplicationName</td>
+                <td><a asp-action="Update" asp-route-id="@item.Id">Güncelle</a></td>
+                <td><a asp-action="Delete"  asp-route-id="@item.Id">Sil</a></td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+

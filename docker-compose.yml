@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  configurationreader.api:
+    image: ${DOCKER_REGISTRY-}configurationreaderapi
+    build:
+      context: .
+      dockerfile: ConfigurationReader.Api/Dockerfile
+  redis:
+   image: redis
+  # configurationreaderbackgrounddb:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  # serviceconfigurationapidb:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  rabbitmq:
+   image: masstransit/rabbitmq
+  serviceconfigurationdb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+
+  configurationreader.backgroud:
+    image: ${DOCKER_REGISTRY-}configurationreaderbackgroud
+    build:
+      context: .
+      dockerfile: ConfigurationReader.Backgroud/Dockerfile
+
+
+  configurationreader.webapp:
+    image: ${DOCKER_REGISTRY-}configurationreaderwebapp
+    build:
+      context: .
+      dockerfile: ConfigurationReader.WebApp/Dockerfile
+volumes:
+  serviceconfigurationdb_volume:
+  # configurationreaderbackgrounddb_volume:
+

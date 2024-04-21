@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "configurationreader.api": "StartDebugging",
+        "configurationreader.backgroud": "StartDebugging",
+        "configurationreader.webapp": "StartDebugging"
+      }
+    }
+  }
+}
