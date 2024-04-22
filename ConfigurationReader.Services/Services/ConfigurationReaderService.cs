@@ -1,6 +1,6 @@
-﻿using ConfigurationReader.Infrastructure.Repository;
-using ConfigurationReader.Services.Data.Entities;
-using ConfigurationReader.Services.Settings;
+﻿using ConfigurationReader.Data.Entities;
+using ConfigurationReader.Interfaces;
+using ConfigurationReader.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ConfigurationReader.Services.Services
+namespace ConfigurationReader.Services
 {
     public class ConfigurationReaderService : IConfigurationReaderService
     {

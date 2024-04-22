@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace ConfigurationReader.Services.Services
+namespace ConfigurationReader.Services
 {
     public interface IConfigurationReaderService
     {

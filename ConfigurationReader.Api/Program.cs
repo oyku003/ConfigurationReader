@@ -1,6 +1,8 @@
 
+using ConfigurationReader.Logger;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace ConfigurationReader.Api
 {
@@ -8,7 +10,10 @@ namespace ConfigurationReader.Api
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var builder = CreateHostBuilder(args);
+            builder.UseSerilog(Logging.ConfigureLogging);
+
+            builder.Build().Run();         
         }
 
 

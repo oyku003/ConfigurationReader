@@ -1,14 +1,9 @@
 ﻿
-using ConfigurationReader.Services.Data.Entities;
-using ConfigurationReader.Services.Data.Settings;
+using ConfigurationReader.Data.Entities;
+using ConfigurationReader.Data.Settings;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ConfigurationReader.Services
+namespace ConfigurationReader.Data
 {
     public class AppDbContext : DbContext
     {
@@ -22,7 +17,6 @@ namespace ConfigurationReader.Services
         {
             modelBuilder.ApplyConfiguration(new ServiceConfigurationSetting());
             modelBuilder.ApplyConfiguration(new ServiceConfigurationSeed());
-            // builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
             base.OnModelCreating(modelBuilder);
         }
     }

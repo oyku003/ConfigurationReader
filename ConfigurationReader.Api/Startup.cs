@@ -15,7 +15,8 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
 using  MediatR;
-
+using ConfigurationReader.Shared.Extension;
+using System;
 namespace ConfigurationReader.Api
 {
     public class Startup
@@ -41,8 +42,8 @@ namespace ConfigurationReader.Api
             {
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServer"), sqlOptions =>
                 {
-                     sqlOptions.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
-                   // sqlOptions.MigrationsAssembly("ConfigurationReader.Services");
+                    sqlOptions.MigrationsAssembly("ConfigurationReader.Api");
+                    sqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(20), null);
                 });
             });
             services.AddMediatR(typeof(GetServiceConfigurationQueryHandler).Assembly);
@@ -63,7 +64,8 @@ namespace ConfigurationReader.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ConfigurationReader.Api v1"));
             }
 
-           app.UseHttpsRedirection();
+            app.UseCustomException();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 

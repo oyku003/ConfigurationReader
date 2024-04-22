@@ -5,12 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ConfigurationReader.Api.Data.Repositories
 {
-    public class ReadOnlyRepository<TEntity> : IReadOnlyRepository<TEntity> where TEntity : class//, IBaseEntity<TId>
+    public class ReadOnlyRepository<TEntity> : IReadOnlyRepository<TEntity> where TEntity : class
     {
         protected readonly DbContext dbContext;
         private readonly DbSet<TEntity> dbSet;
@@ -32,7 +31,7 @@ namespace ConfigurationReader.Api.Data.Repositories
 
         public async Task<TEntity> GetByIdAsync(int id)
         {
-            return await dbSet.FindAsync(id);//birden fazla primary key olan tablolar için dizi de verebilirdik
+            return await dbSet.FindAsync(id);
         }
         public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {

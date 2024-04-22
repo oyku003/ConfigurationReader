@@ -1,18 +1,16 @@
 ﻿
-using ConfigurationReader.Infrastructure.Repository;
-using ConfigurationReader.Services.Data.Repositories;
-using ConfigurationReader.Services.Services;
-using ConfigurationReader.Services.Settings;
+using ConfigurationReader.Data;
+using ConfigurationReader.Data.Repositories;
+using ConfigurationReader.Interfaces;
+using ConfigurationReader.Services;
+using ConfigurationReader.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using System;
 using System.Reflection;
-using static System.Net.Mime.MediaTypeNames;
 
-namespace ConfigurationReader.Services.Extensions
+namespace ConfigurationReader.Extensions
 {
     public static class ConfigurationReaderExtension
     {      
@@ -44,8 +42,7 @@ namespace ConfigurationReader.Services.Extensions
             {
                 options.UseSqlServer(configuration.GetConnectionString("SqlServer"), sqlOptions =>
                 {
-                    // sqlOptions.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
-                    sqlOptions.MigrationsAssembly("ConfigurationReader.Services");
+                    sqlOptions.MigrationsAssembly("ConfigurationReader");
                 });
             });           
 

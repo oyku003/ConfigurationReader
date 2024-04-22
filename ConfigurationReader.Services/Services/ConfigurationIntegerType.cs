@@ -1,17 +1,12 @@
-﻿using ConfigurationReader.Services.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConfigurationReader.Services.Services
+﻿using ConfigurationReader.Enums;
+using ConfigurationReader.Helpers;
+namespace ConfigurationReader.Services
 {
     public class ConfigurationIntegerType : IConfigurationType
     {
-        public string Type => "Int";
+        public string Type => TypeEnum.Int.ToString();
 
         public object GetValue(string value)
-            => TypeHelper.Parse("System.Int32", value);
+            => value.Parse(TypeEnum.Int.GetDescription());
     }
 }

@@ -21,23 +21,22 @@ services:
       - serviceconfigurationdb_volume:/var/opt/mssql
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=Password12**
-  # configurationreaderbackgrounddb:
-  #   container_name: configurationreaderbackgrounddb
-  #   restart: always
-  #   ports:
-  #     - "1444:1433"
-  #   volumes:
-  #     - configurationreaderbackgrounddb_volume:/var/opt/mssql
-  #   environment:
-  #     - ACCEPT_EULA=Y
-  #     - SA_PASSWORD=Password12*
+      - MSSQL_SA_PASSWORD=Password12**
+  configurationreaderworkerdb:
+    container_name: configurationreaderworkerdb
+    restart: always
+    ports:
+      - "1444:1433"
+    volumes:
+      - configurationreaderworkerdb_volume:/var/opt/mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password12**
   configurationreader.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "ConnectionStrings:SqlServer=Server=serviceconfigurationdb,1433;Database=ConfigurationReader;User=sa; Password=Password12**"
-
+      - "ConnectionStrings:SqlServer=serviceconfigurationdb,1433;Database=ConfigurationReader;User=sa; Password=Password12**;TrustServerCertificate=True"
     ports:
       - "5000:80"
     volumes:
@@ -45,21 +44,6 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
       - serviceconfigurationdb
-  configurationreader.backgroud:
-    environment:
-      - DOTNET_ENVIRONMENT=Development
-      - "ConnectionStrings:SqlServer=Server=serviceconfigurationdb,1433;Database=ConfigurationReader;User=sa; Password=Password12**"
-      - RedisSettings:Port=6379
-      - RedisSettings:Host=redis
-      - RabbitMqSettings:Url=rabbitmq
-      - RabbitMqSettings:Username=guest
-      - RabbitMqSettings:Password=guest
-    depends_on:
-      - serviceconfigurationdb
-      - rabbitmq
-      - redis
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 
   configurationreader.webapp:
     environment:
@@ -72,3 +56,38 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     depends_on:
       - configurationreader.api
+  elasticsearch:
+   ports:
+    - 9200:9200
+   environment:
+    - xpack.security.enabled=false
+    - "discovery.type=single-node"
+    - ELASTIC_USERNAME=elastic
+    - ELASTIC_PASSWORD=DkIedPPSCb
+   volumes:
+    - elastic_db:/usr/share/elasticsearch/data
+  kibana:
+   ports:
+    - 5601:5601
+   environment:
+    - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+   depends_on:
+   - elasticsearch
+  configurationreader.worker:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - "ConnectionStrings:SqlServer=configurationreaderworkerdb,1433;Database=ConfigurationReader;User=sa; Password=Password12**;TrustServerCertificate=True"
+      - RedisSettings:Port=6379
+      - RedisSettings:Host=redis
+      - RabbitMqSettings:Url=rabbitmq
+      - RabbitMqSettings:Username=guest
+      - RabbitMqSettings:Password=guest
+    depends_on:
+      - configurationreaderworkerdb
+      - rabbitmq
+      - redis
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+volumes:
+  elastic_db:
+

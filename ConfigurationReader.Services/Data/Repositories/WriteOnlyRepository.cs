@@ -1,16 +1,11 @@
-﻿using ConfigurationReader.Infrastructure.Entity;
-using ConfigurationReader.Infrastructure.Repository;
+﻿using ConfigurationReader.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfigurationReader.Services.Data.Repositories
+namespace ConfigurationReader.Data.Repositories
 {
-    public class WriteOnlyRepository<TEntity> : IWriteOnlyRepository<TEntity> where TEntity : class//, IBaseEntity<TId>
+    public class WriteOnlyRepository<TEntity> : IWriteOnlyRepository<TEntity> where TEntity : class
     {
         protected readonly DbContext dbContext;
         private readonly DbSet<TEntity> dbSet;

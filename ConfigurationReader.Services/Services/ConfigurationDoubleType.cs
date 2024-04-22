@@ -1,17 +1,13 @@
-﻿using ConfigurationReader.Services.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConfigurationReader.Enums;
+using ConfigurationReader.Helpers;
 
-namespace ConfigurationReader.Services.Services
+namespace ConfigurationReader.Services
 {
     public class ConfigurationDoubleType : IConfigurationType
     {
-        public string Type => "Double";//todo enum or const
+        public string Type => TypeEnum.Double.ToString();
 
         public object GetValue(string value)
-            => TypeHelper.Parse("System.Double", value);
+            => value.Parse(TypeEnum.Double.GetDescription());
     }
 }

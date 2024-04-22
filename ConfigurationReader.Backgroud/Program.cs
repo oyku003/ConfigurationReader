@@ -1,17 +1,17 @@
-using ConfigurationReader.Backgroud.Consumers;
-using ConfigurationReader.Backgroud.Data.Repositories;
-using ConfigurationReader.Backgroud.Services;
-using ConfigurationReader.Backgroud.Settings;
+using ConfigurationReader.Background.Consumers;
+using ConfigurationReader.Background.Data.Repositories;
+using ConfigurationReader.Background.Services;
+using ConfigurationReader.Background.Settings;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Serilog;
 using System;
-using System.Reflection;
 
-namespace ConfigurationReader.Backgroud
+namespace ConfigurationReader.Background
 {
     public class Program
     {
@@ -24,7 +24,10 @@ namespace ConfigurationReader.Backgroud
             configuration = new ConfigurationBuilder()
         .AddJsonFile("appsettings.json", optional: false)
         .Build();
-             CreateHostBuilder(args).Build().Run();
+            var builder = CreateHostBuilder(args);
+            builder.UseSerilog(Logging.ConfigureLogging);
+
+            builder.Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -33,6 +36,7 @@ namespace ConfigurationReader.Backgroud
                 {
                     
                     services.Configure<RedisSetting>(configuration.GetSection("RedisSettings"));
+                    services.Configure<DbSetting>(configuration.GetSection("ConnectionStrings"));
                     services.AddSingleton<RedisService>(sp =>
                     {
                         var redisSettings = sp.GetRequiredService<IOptions<RedisSetting>>().Value;
@@ -48,7 +52,7 @@ namespace ConfigurationReader.Backgroud
                     {
                         options.UseSqlServer(configuration.GetConnectionString("SqlServer"), sqlOptions =>
                         {
-                             sqlOptions.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
+                             sqlOptions.MigrationsAssembly("ConfigurationReader.Background");
                         });
                     });
 
@@ -57,6 +61,7 @@ namespace ConfigurationReader.Backgroud
                     {
                         x.AddConsumer<ServiceConfigurationStorageChangedEventConsumer>();
                         x.AddConsumer<ServiceConfigurationStorageCreatedEventConsumer>();
+                        x.AddConsumer<ServiceConfigurationStorageDeletedEventConsumer>();
                         var host = IsRunningInContainer ?"rabbitmq":rabbitMqSettings.Url;
                         x.UsingRabbitMq((context, cfg) =>
                         {
@@ -75,6 +80,11 @@ namespace ConfigurationReader.Backgroud
                             cfg.ReceiveEndpoint("ServiceConfigurationStorageCreatedQueue", e =>
                             {
                                 e.ConfigureConsumer<ServiceConfigurationStorageCreatedEventConsumer>(context);
+                            });
+                            
+                            cfg.ReceiveEndpoint("ServiceConfigurationStorageDeletedQueue", e =>
+                            {
+                                e.ConfigureConsumer<ServiceConfigurationStorageDeletedEventConsumer>(context);
                             });
                         });
 

@@ -1,5 +1,5 @@
-﻿using ConfigurationReader.Shared.Models;
-using ConfigurationReader.Shared.Models.Dtos;
+﻿using ConfigurationReader.Shared.Models.Dtos;
+using ConfigurationReader.Shared.Models.Requests;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -17,8 +17,7 @@ namespace ConfigurationReader.WebApp.Services
         }
 
         public async Task CreateAsync(CreateServiceConfigurationRequest createServiceConfigurationRequest)
-            => await _client.PostAsJsonAsync("api/ConfigurationReaders", createServiceConfigurationRequest);
-        
+            => await _client.PostAsJsonAsync("api/ConfigurationReaders", createServiceConfigurationRequest);       
 
         public async Task<List<ServiceConfigurationDto>> GetAsync()
         => await _client.GetFromJsonAsync<List<ServiceConfigurationDto>>("api/ConfigurationReaders");

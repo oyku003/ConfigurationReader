@@ -20,6 +20,7 @@ namespace ConfigurationReader.Api.Data.Settings
             builder.Property(x => x.Value).IsRequired();
             builder.Property(x => x.Type).IsRequired();
             builder.Property(x => x.ApplicationName).IsRequired();
+            builder.Property(x => x.IsActive).IsRequired();
             builder.ToTable("ServiceConfiguration");
         }
     }

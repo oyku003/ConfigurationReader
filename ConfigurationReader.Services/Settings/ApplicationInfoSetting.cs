@@ -1,4 +1,4 @@
-﻿namespace ConfigurationReader.Services.Settings
+﻿namespace ConfigurationReader.Settings
 {
     public class ApplicationInfoSetting
     {

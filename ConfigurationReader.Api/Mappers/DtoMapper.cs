@@ -2,8 +2,9 @@
 using ConfigurationReader.Api.Data.Entities;
 using ConfigurationReader.Api.Services.Cqrs.Commands;
 using ConfigurationReader.Api.Services.Cqrs.Queries;
-using ConfigurationReader.Shared.Models;
 using ConfigurationReader.Shared.Models.Dtos;
+using ConfigurationReader.Shared.Models.Requests;
+using ConfigurationReader.Shared.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,17 +1,13 @@
-﻿using ConfigurationReader.Services.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConfigurationReader.Enums;
+using ConfigurationReader.Helpers;
 
-namespace ConfigurationReader.Services.Services
+namespace ConfigurationReader.Services
 {
     public class ConfigurationBooleanType : IConfigurationType
     {
-        public string Type => "Boolean";
+        public string Type => TypeEnum.Boolean.ToString();
 
         public object GetValue(string value)
-            => TypeHelper.Parse("System.Boolean", value);
+            => value.Parse(TypeEnum.Boolean.GetDescription());
     }
 }

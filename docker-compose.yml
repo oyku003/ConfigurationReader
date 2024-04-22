@@ -8,28 +8,29 @@ services:
       dockerfile: ConfigurationReader.Api/Dockerfile
   redis:
    image: redis
-  # configurationreaderbackgrounddb:
-  #   image: mcr.microsoft.com/mssql/server:2019-latest
-  # serviceconfigurationapidb:
-  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  elasticsearch:
+   image: docker.elastic.co/elasticsearch/elasticsearch:8.8.1  
+  kibana:
+   image: docker.elastic.co/kibana/kibana:8.8.1  
   rabbitmq:
    image: masstransit/rabbitmq
   serviceconfigurationdb:
     image: mcr.microsoft.com/mssql/server:2019-latest
-
-  configurationreader.backgroud:
-    image: ${DOCKER_REGISTRY-}configurationreaderbackgroud
-    build:
-      context: .
-      dockerfile: ConfigurationReader.Backgroud/Dockerfile
-
-
+  configurationreaderworkerdb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
   configurationreader.webapp:
     image: ${DOCKER_REGISTRY-}configurationreaderwebapp
     build:
       context: .
       dockerfile: ConfigurationReader.WebApp/Dockerfile
+  configurationreader.worker:
+    image: ${DOCKER_REGISTRY-}configurationreaderworker
+    build:
+      context: .
+      dockerfile: ConfigurationReader.Worker/Dockerfile
+
 volumes:
   serviceconfigurationdb_volume:
-  # configurationreaderbackgrounddb_volume:
+  configurationreaderworkerdb_volume:
+
 

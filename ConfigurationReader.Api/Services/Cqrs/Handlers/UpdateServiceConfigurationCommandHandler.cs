@@ -3,6 +3,7 @@ using ConfigurationReader.Api.Data.Entities;
 using ConfigurationReader.Api.Interfaces;
 using ConfigurationReader.Api.Services.Cqrs.Commands;
 using ConfigurationReader.Services.Mappers;
+using ConfigurationReader.Shared.Exceptions;
 using MediatR;
 using System.Linq;
 using System.Threading;
@@ -23,13 +24,41 @@ namespace ConfigurationReader.Api.Services.Cqrs.Handlers
 
         public async Task<Unit> Handle(UpdateServiceConfigurationCommand request, CancellationToken cancellationToken)
         {
-            //todo: validation
-            //todo: redis olsun mu düşün
-           var entity = (await _readRepository.Where(x => x.Id == request.Id)).FirstOrDefault();
+            if (request == default)
+            {
+                throw new CustomException($"{nameof(request)} is not null");
+            }
+
+            if (request.Id==default)
+            {
+                throw new CustomException($"{nameof(request.Type)} can not be zero");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Type))
+            {
+                throw new CustomException($"{nameof(request.Type)} can not be null");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Value))
+            {
+                throw new CustomException($"{nameof(request.Value)} can not be null");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.ApplicationName))
+            {
+                throw new CustomException($"{nameof(request.ApplicationName)} can not be null");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Name))
+            {
+                throw new CustomException($"{nameof(request.Name)} can not be null");
+            }
+
+            var entity = (await _readRepository.Where(x => x.Id == request.Id)).FirstOrDefault();
 
             if (entity == default)
             {
-                //todo
+                throw new CustomException($"{nameof(entity)} could not be found");
             }
 
             ObjectMapper.Mapper.Map(request, entity);

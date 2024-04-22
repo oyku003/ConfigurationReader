@@ -1,17 +1,12 @@
-﻿using ConfigurationReader.Services.Helpers;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConfigurationReader.Enums;
+using ConfigurationReader.Helpers;
 
-namespace ConfigurationReader.Services.Services
+namespace ConfigurationReader.Services
 {
     public class ConfigurationStringType : IConfigurationType
     {
-        public string Type => "String";
+        public string Type => TypeEnum.String.ToString();
         public object GetValue(string value)
-            => TypeHelper.Parse("System.String", value);        
+            => value.Parse(TypeEnum.String.GetDescription());        
     }
 }

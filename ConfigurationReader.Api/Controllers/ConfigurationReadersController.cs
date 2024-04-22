@@ -2,7 +2,8 @@
 using ConfigurationReader.Api.Services.Cqrs.Commands;
 using ConfigurationReader.Api.Services.Cqrs.Queries;
 using ConfigurationReader.Services.Mappers;
-using ConfigurationReader.Shared.Models;
+using ConfigurationReader.Shared.Models.Requests;
+using ConfigurationReader.Shared.Models.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ConfigurationReader.Services.Helpers
+namespace ConfigurationReader.Helpers
 {
     public static class TypeHelper
     {
-       public static object Parse(string typeName, string value)
+       public static object Parse(this string value, string typeName)
         {
             var type = Type.GetType(typeName);
             var converter = TypeDescriptor.GetConverter(type);

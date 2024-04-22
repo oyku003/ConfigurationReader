@@ -1,7 +1,9 @@
 ﻿using ConfigurationReader.Api.Data.Entities;
 using ConfigurationReader.Api.Interfaces;
 using ConfigurationReader.Api.Services.Cqrs.Commands;
+using ConfigurationReader.Shared.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,7 +26,7 @@ namespace ConfigurationReader.Api.Services.Cqrs.Handlers
 
             if (entity == default)
             {
-                //todo handle
+                throw new CustomException($"{nameof(entity)} could not be found");
             }
             entity.IsActive = 0;
             _repository.Update(entity);

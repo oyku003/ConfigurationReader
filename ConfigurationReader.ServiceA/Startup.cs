@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using ConfigurationReader.Extensions;
 namespace ConfigurationReader.ServiceA
 {
     public class Startup
@@ -26,7 +26,7 @@ namespace ConfigurationReader.ServiceA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddConfigurationReaderExt(Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

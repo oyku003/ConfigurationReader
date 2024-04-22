@@ -5,8 +5,9 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "configurationreader.api": "StartDebugging",
-        "configurationreader.backgroud": "StartDebugging",
-        "configurationreader.webapp": "StartDebugging"
+        "configurationreader.Background": "StartDebugging",
+        "configurationreader.webapp": "StartDebugging",
+        "configurationreader.worker": "StartDebugging"
       }
     }
   }

@@ -3,21 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationReader.Api", "ConfigurationReader.Api\ConfigurationReader.Api.csproj", "{82C474F5-77C8-4BD3-BCFD-37650EC8845B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationReader.Api", "ConfigurationReader.Api\ConfigurationReader.Api.csproj", "{82C474F5-77C8-4BD3-BCFD-37650EC8845B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationReader", "ConfigurationReader.Services\ConfigurationReader.csproj", "{0979E7A0-5CCD-4653-822F-6E884343DC34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationReader", "ConfigurationReader.Services\ConfigurationReader.csproj", "{0979E7A0-5CCD-4653-822F-6E884343DC34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationReader.WebApp", "ConfigurationReader.WebApp\ConfigurationReader.WebApp.csproj", "{4A3DCB69-24DB-40E5-B3C6-066A4BB66E5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationReader.WebApp", "ConfigurationReader.WebApp\ConfigurationReader.WebApp.csproj", "{4A3DCB69-24DB-40E5-B3C6-066A4BB66E5A}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{126CC060-EBD1-4901-9B79-D93188B5B0F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationReader.Backgroud", "ConfigurationReader.Backgroud\ConfigurationReader.Backgroud.csproj", "{25414A9A-C8F3-4BBE-9614-FFE99CBD75E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationReader.Shared", "ConfigurationReader.Shareds\ConfigurationReader.Shared.csproj", "{1255DD7E-B762-453E-824D-C5EECD27E6A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationReader.Shared", "ConfigurationReader.Shareds\ConfigurationReader.Shared.csproj", "{1255DD7E-B762-453E-824D-C5EECD27E6A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationReader.ServiceA", "ConfigurationReader.ServiceA\ConfigurationReader.ServiceA.csproj", "{2B5B10B8-F9C8-4E46-BE88-39FDFDC5EB3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationReader.ServiceA", "ConfigurationReader.ServiceA\ConfigurationReader.ServiceA.csproj", "{2B5B10B8-F9C8-4E46-BE88-39FDFDC5EB3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationReader.ServiceB", "ConfigurationReader.ServiceB\ConfigurationReader.ServiceB.csproj", "{367E6B99-9549-4A96-A570-8A493E539CDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationReader.ServiceB", "ConfigurationReader.ServiceB\ConfigurationReader.ServiceB.csproj", "{367E6B99-9549-4A96-A570-8A493E539CDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationReader.Logger", "ConfigurationReader.Logger\ConfigurationReader.Logger.csproj", "{2A808EED-F33A-4064-912A-DB71B679500C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationReader.Worker", "ConfigurationReader.Worker\ConfigurationReader.Worker.csproj", "{B6387E1B-9A21-4DC5-A157-F28B7F72CDEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +43,6 @@ Global
 		{126CC060-EBD1-4901-9B79-D93188B5B0F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{126CC060-EBD1-4901-9B79-D93188B5B0F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{126CC060-EBD1-4901-9B79-D93188B5B0F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{25414A9A-C8F3-4BBE-9614-FFE99CBD75E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{25414A9A-C8F3-4BBE-9614-FFE99CBD75E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{25414A9A-C8F3-4BBE-9614-FFE99CBD75E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{25414A9A-C8F3-4BBE-9614-FFE99CBD75E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1255DD7E-B762-453E-824D-C5EECD27E6A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1255DD7E-B762-453E-824D-C5EECD27E6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1255DD7E-B762-453E-824D-C5EECD27E6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +55,14 @@ Global
 		{367E6B99-9549-4A96-A570-8A493E539CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{367E6B99-9549-4A96-A570-8A493E539CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{367E6B99-9549-4A96-A570-8A493E539CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A808EED-F33A-4064-912A-DB71B679500C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A808EED-F33A-4064-912A-DB71B679500C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A808EED-F33A-4064-912A-DB71B679500C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A808EED-F33A-4064-912A-DB71B679500C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6387E1B-9A21-4DC5-A157-F28B7F72CDEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6387E1B-9A21-4DC5-A157-F28B7F72CDEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6387E1B-9A21-4DC5-A157-F28B7F72CDEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6387E1B-9A21-4DC5-A157-F28B7F72CDEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

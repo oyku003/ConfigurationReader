@@ -1,5 +1,5 @@
-﻿using ConfigurationReader.Shared.Models;
-using ConfigurationReader.Shared.Models.Dtos;
+﻿using ConfigurationReader.Shared.Models.Dtos;
+using ConfigurationReader.Shared.Models.Requests;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
