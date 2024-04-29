@@ -63,7 +63,7 @@ namespace ConfigurationReader.Worker
                     var rabbitMqSettings = configuration.GetSection("RabbitMqSettings").Get<MessageBrokerSetting>();
                     services.AddMassTransit(x =>
                     {
-                       // x.AddConsumer<ServiceConfigurationStorageChangedEventConsumer>();
+                        x.AddConsumer<ServiceConfigurationStorageChangedEventConsumer>();
                         x.AddConsumer<ServiceConfigurationStorageCreatedEventConsumer>();
                         x.AddConsumer<ServiceConfigurationStorageDeletedEventConsumer>();
                         var host = IsRunningInContainer ? "rabbitmq" : rabbitMqSettings.Url;
@@ -76,10 +76,10 @@ namespace ConfigurationReader.Worker
                                 host.Password(rabbitMqSettings.Password);
                             });
 
-                            //cfg.ReceiveEndpoint("ServiceConfigurationStorageChangedQueue", e =>
-                            //{
-                            //    e.ConfigureConsumer<ServiceConfigurationStorageChangedEventConsumer>(context);
-                            //});
+                            cfg.ReceiveEndpoint("ServiceConfigurationStorageChangedQueue", e =>
+                            {
+                                e.ConfigureConsumer<ServiceConfigurationStorageChangedEventConsumer>(context);
+                            });
 
                             cfg.ReceiveEndpoint("ServiceConfigurationStorageCreatedQueue", e =>
                             {
